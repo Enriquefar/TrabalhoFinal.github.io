@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio | Contato</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <div id="titlebar">
+    <div id="btn-menu-mobile" onclick="toggleSidebarMobile()" title="Menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </div>
+    <div class="traffic-lights">
+      <div class="traffic-light tl-red"    id="tl-red"    data-tip="fechar"></div>
+      <div class="traffic-light tl-yellow" id="tl-yellow" data-tip="minimizar"></div>
+      <div class="traffic-light tl-green"  id="tl-green"  data-tip="tela cheia"></div>
+    </div>
+    <div id="titlebar-center">
+      <div id="titlebar-name">contato.json — portfolio-enrique — Visual Studio Code</div>
+      <button id="btn-search-title" onclick="abrirBusca()">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        portfolio-enrique
+        <kbd>Ctrl+P</kbd>
+      </button>
+    </div>
+  </div>
+
+  <div id="menubar">
+    <span class="menu-item">File</span>
+    <span class="menu-item">Edit</span>
+    <span class="menu-item">View</span>
+    <span class="menu-item">Go</span>
+    <span class="menu-item">Run</span>
+    <span class="menu-item" onclick="abrirTerminal()">Terminal</span>
+    <span class="menu-item">Help</span>
+  </div>
+
+  <div id="activitybar">
+    <div class="act-icon active" title="Explorer">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+        <path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/>
+      </svg>
+    </div>
+    <div class="act-icon" title="Buscar arquivos (Ctrl+P)" onclick="abrirBusca()">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+    </div>
+    <div class="act-icon" title="Git">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+        <circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/>
+        <path d="M6 8v8M8 6h7a2 2 0 012 2v1"/>
+      </svg>
+    </div>
+    <div class="act-icon" title="Terminal (Ctrl+`)" onclick="abrirTerminal()">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+        <path d="M4 17l6-6-6-6M12 19h8"/>
+      </svg>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    <div class="sidebar-title">Explorer</div>
+    <div class="folder-label">
+      <svg width="14" height="14" fill="#F1FA8C" viewBox="0 0 24 24">
+        <path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/>
+      </svg>
+      portfolio-enrique
+    </div>
+    <a class="tree-item" href="sobre.html">
+      <span class="tree-icon ext-js">●</span>sobre-mim.js
+    </a>
+    <a class="tree-item" href="habilidades.html">
+      <span class="tree-icon ext-css">◆</span>habilidades.css
+    </a>
+    <a class="tree-item active" href="index.html">
+      <span class="tree-icon ext-json">❯</span>contato.json
+    </a>
+    <div class="tree-item" style="opacity:.4; cursor:default;">
+      <span class="tree-icon ext-md">✦</span>README.md
+    </div>
+  </div>
+
+  <div id="sidebar-overlay" onclick="toggleSidebarMobile()"></div>
+
+  <div id="editor-area">
+    <div id="tab-bar">
+      <div class="tab"><span class="tab-dot"></span>contato.json</div>
+    </div>
+    <div id="editor-content">
+      <div class="line-numbers" id="line-numbers"></div>
+      <div class="code-view">
+        <span class="code-line"><span class="cmt">// contato.json — Enrique Rodrigues</span></span>
+        <span class="code-line"></span>
+        <span class="code-line"><span class="obj">{</span></span>
+        <span class="code-line">  <span class="str">"nome"</span><span class="op">:</span>        <span class="str">"Enrique Fernandes Alves Rodrigues"</span><span class="obj">,</span></span>
+        <span class="code-line">  <span class="str">"local"</span><span class="op">:</span>       <span class="str">"Londrina, Paraná — Brasil"</span><span class="obj">,</span></span>
+        <span class="code-line">  <span class="str">"disponivel"</span><span class="op">:  <span class="num">true</span><span class="obj">,</span></span>
+        <span class="code-line">  <span class="str">"links"</span><span class="op">: "Links para contato:"</span><span class="obj">,</span></span>
+        <span class="code-line">  <span class="str">"links_sociais"</span><span class="op">:</span> <span class="obj">{</span></span>
+        <span class="code-line">    <span class="str">"email"</span><span class="op">:</span>    <span class="str">"<a class="contact-link" href="mailto:seuemail@gmail.com">enriquefar@edu.unifil.br</a>"</span><span class="obj">,</span></span>
+        <span class="code-line">    <span class="str">"github"</span><span class="op">:</span>   <span class="str">"<a class="contact-link" href="https://github.com" target="_blank">github.com/Enriquefar</a>"</span><span class="obj">,</span></span>
+        <span class="code-line">    <span class="str">"linkedin"</span><span class="op">: "</span><span class="str"><a class="contact-link" href="https://linkedin.com" target="_blank">linkedin.com/in/enrique-rodrigues-7b9585350/</a>"</span></span>
+        <span class="code-line">  <span class="obj">},</span></span>
+        <span class="code-line">  <span class="str">"mensagem"</span><span class="op">:</span>    <span class="str">"Aberto a projetos, estágios e colaborações!"</span></span>
+        <span class="code-line"><span class="obj">}</span></span>
+      </div>
+      <div id="minimap">
+        <div class="minimap-line" style="width:60%"></div>
+        <div class="minimap-line pink" style="width:80%"></div>
+        <div class="minimap-line" style="width:50%"></div>
+        <div class="minimap-line purple" style="width:90%"></div>
+        <div class="minimap-line" style="width:40%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="terminal-panel">
+    <div id="terminal-resize-handle"></div>
+    <div id="terminal-header">
+      <span class="terminal-tab">TERMINAL</span>
+      <span class="terminal-tab-inactive">PROBLEMAS</span>
+      <span class="terminal-tab-inactive">SAÍDA</span>
+      <span class="terminal-tab-inactive">CONSOLE</span>
+      <button id="terminal-close" onclick="fecharTerminal()">✕</button>
+    </div>
+    <div id="terminal-body">
+      <span class="term-line"><span class="term-output">Bem-vindo ao terminal do portfólio! Digite <strong>help</strong> para ver os comandos.</span></span>
+    </div>
+    <div id="terminal-input-row">
+      <span class="term-prompt">enrique</span>
+      <span style="color:var(--fg-muted)">@</span>
+      <span class="term-path">portfolio</span>
+      <span style="color:var(--fg-muted)"> $ </span>
+      <input type="text" id="term-input" autocomplete="off" spellcheck="false" />
+    </div>
+  </div>
+
+  <div id="statusbar">
+    <span class="status-item">⎇ main</span>
+    <span class="status-item" id="btn-terminal" title="Ctrl+`">⬛ TERMINAL</span>
+    <div class="status-right">
+      <span>JSON</span>
+      <span>UTF-8</span>
+      <span id="status-ln">Ln 1, Col 1</span>
+      <span>Dracula Theme</span>
+    </div>
+  </div>
+
+</div>
+
+<div id="search-modal">
+  <div id="search-overlay"></div>
+  <div id="search-box">
+    <div id="search-input-row">
+      <span>›</span>
+      <input type="text" id="search-input" placeholder="Go to file or run command..." autocomplete="off" spellcheck="false" />
+      <span id="search-esc">Esc</span>
+    </div>
+    <div class="search-section-label">FILES</div>
+    <div id="search-list"></div>
+    <div id="search-footer">
+      <span><kbd>↑↓</kbd> navegar</span>
+      <span><kbd>↵</kbd> abrir</span>
+      <span><kbd>Esc</kbd> fechar</span>
+    </div>
+  </div>
+</div>
+
+<div id="notification"></div>
+<script src="main.js"></script>
+</body>
+</html>
