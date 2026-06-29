@@ -40,9 +40,9 @@ function animarBarras() {
 
 // ── MODAL DE BUSCA ──
 var arquivos = [
-  { nome: 'sobre-mim.js',    icone: '🟡', path: 'src/', url: '../sobre/index.html' },
-  { nome: 'habilidades.css', icone: '🟣', path: 'src/', url: '../habilidades/index.html' },
-  { nome: 'contato.json',    icone: '🟠', path: 'src/', url: '../contato/index.html' },
+  { nome: 'sobre-mim.js',    icone: '🟡', path: 'src/', url: 'sobre.html' },
+  { nome: 'habilidades.css', icone: '🟣', path: 'src/', url: 'habilidades.html' },
+  { nome: 'contato.json',    icone: '🟠', path: 'src/', url: 'index.html' },
   { nome: 'README.md',       icone: '🔵', path: './',   url: '#' },
 ];
 var selectedIndex = 0;
@@ -97,7 +97,7 @@ function confirmarBusca() {
 // ── TRAFFIC LIGHTS ──
 function configurarTrafficLights() {
   document.getElementById('tl-red').addEventListener('click', function () {
-    mostrarNotificacao(':C');
+    mostrarNotificacao('🚫 Você não pode fechar um portfólio!');
   });
   document.getElementById('tl-yellow').addEventListener('click', function () {
     mostrarNotificacao('🟡 Minimizando... mas onde você vai?');
@@ -151,11 +151,11 @@ var comandos = {
     return [];
   },
   'cd sobre': function () {
-    setTimeout(function () { window.location.href = '../sobre/index.html'; }, 300);
+    setTimeout(function () { window.location.href = 'sobre.html'; }, 300);
     return ['<span class="term-output">Navegando para sobre-mim.js...</span>'];
   },
   'cd contato': function () {
-    setTimeout(function () { window.location.href = '../contato/index.html'; }, 300);
+    setTimeout(function () { window.location.href = 'index.html'; }, 300);
     return ['<span class="term-output">Navegando para contato.json...</span>'];
   },
 };

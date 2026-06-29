@@ -1,4 +1,4 @@
-// main.js — Página: Sobre Mim
+// main.js — Página: Habilidades
 
 // ── NÚMEROS DE LINHA ──
 function gerarLinhas(quantidade) {
@@ -20,14 +20,31 @@ function rastrearCursor() {
   });
 }
 
+// ── BARRAS DE HABILIDADES ──
+function animarBarras() {
+  var barras = [
+    { id: 'bar-html', largura: '140px', cor: '#50FA7B' },
+    { id: 'bar-css',  largura: '130px', cor: '#BD93F9' },
+    { id: 'bar-js',   largura: '115px', cor: '#F1FA8C' },
+    { id: 'bar-py',   largura: '100px', cor: '#8BE9FD' },
+    { id: 'bar-java', largura: '90px',  cor: '#FF79C6' },
+  ];
+  barras.forEach(function (b, i) {
+    var el = document.getElementById(b.id);
+    if (!el) return;
+    el.style.background = b.cor;
+    el.style.width = '0';
+    setTimeout(function () { el.style.width = b.largura; }, i * 120 + 200);
+  });
+}
+
 // ── MODAL DE BUSCA ──
 var arquivos = [
-  { nome: 'sobre-mim.js',    icone: '🟡', path: 'src/', url: '../sobre/index.html' },
-  { nome: 'habilidades.css', icone: '🟣', path: 'src/', url: '../habilidades/index.html' },
-  { nome: 'contato.json',    icone: '🟠', path: 'src/', url: '../contato/index.html' },
+  { nome: 'sobre-mim.js',    icone: '🟡', path: 'src/', url: 'sobre.html' },
+  { nome: 'habilidades.css', icone: '🟣', path: 'src/', url: 'habilidades.html' },
+  { nome: 'contato.json',    icone: '🟠', path: 'src/', url: 'index.html' },
   { nome: 'README.md',       icone: '🔵', path: './',   url: '#' },
 ];
-
 var selectedIndex = 0;
 
 function abrirBusca() {
@@ -74,32 +91,24 @@ function navegarBusca(direcao) {
 
 function confirmarBusca() {
   var items = document.querySelectorAll('.search-item');
-  if (items[selectedIndex]) {
-    var url = items[selectedIndex].getAttribute('data-url');
-    irPara(url);
-  }
+  if (items[selectedIndex]) irPara(items[selectedIndex].getAttribute('data-url'));
 }
 
 // ── TRAFFIC LIGHTS ──
 function configurarTrafficLights() {
-  // Vermelho — mostra notificação ("você não pode fechar um portfólio!")
   document.getElementById('tl-red').addEventListener('click', function () {
-    mostrarNotificacao(":C");
+    mostrarNotificacao('🚫 Você não pode fechar um portfólio!');
   });
-
-  // Amarelo — minimiza (esconde conteúdo principal)
   document.getElementById('tl-yellow').addEventListener('click', function () {
-    mostrarNotificacao("🟡 Minimizando... mas onde você vai?");
+    mostrarNotificacao('🟡 Minimizando... mas onde você vai?');
   });
-
-  // Verde — tela cheia
   document.getElementById('tl-green').addEventListener('click', function () {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
-      mostrarNotificacao("🟢 Modo tela cheia ativado");
+      mostrarNotificacao('🟢 Modo tela cheia ativado');
     } else {
       document.exitFullscreen();
-      mostrarNotificacao("🟢 Saindo do modo tela cheia");
+      mostrarNotificacao('🟢 Saindo do modo tela cheia');
     }
   });
 }
@@ -121,18 +130,15 @@ var comandos = {
   'help': function () {
     return [
       '<span class="term-output">Comandos disponíveis:</span>',
-      '<span class="term-output">  ls          — listar arquivos do portfólio</span>',
-      '<span class="term-output">  cd &lt;pasta&gt;  — navegar entre páginas</span>',
-      '<span class="term-output">  whoami      — informações do desenvolvedor</span>',
+      '<span class="term-output">  ls          — listar arquivos</span>',
+      '<span class="term-output">  cd sobre    — ir para Sobre Mim</span>',
+      '<span class="term-output">  cd contato  — ir para Contato</span>',
+      '<span class="term-output">  whoami      — info do desenvolvedor</span>',
       '<span class="term-output">  clear       — limpar terminal</span>',
-      '<span class="term-output">  skills      — ver habilidades</span>',
-      '<span class="term-output">  contact     — ver contatos</span>',
     ];
   },
   'ls': function () {
-    return [
-      '<span class="term-output">sobre-mim.js &nbsp; habilidades.css &nbsp; contato.json &nbsp; README.md</span>',
-    ];
+    return ['<span class="term-output">sobre-mim.js &nbsp; habilidades.css &nbsp; contato.json &nbsp; README.md</span>'];
   },
   'whoami': function () {
     return [
@@ -140,28 +146,16 @@ var comandos = {
       '<span class="term-output">Engenharia de Software — UniFil, Londrina PR</span>',
     ];
   },
-  'skills': function () {
-    window.location.href = '../habilidades/index.html';
-    return ['<span class="term-output">Navegando para habilidades.css...</span>'];
-  },
-  'contact': function () {
-    window.location.href = '../contato/index.html';
-    return ['<span class="term-output">Navegando para contato.json...</span>'];
-  },
   'clear': function () {
     document.getElementById('terminal-body').innerHTML = '';
     return [];
   },
   'cd sobre': function () {
-    window.location.href = '../sobre/index.html';
+    setTimeout(function () { window.location.href = 'sobre.html'; }, 300);
     return ['<span class="term-output">Navegando para sobre-mim.js...</span>'];
   },
-  'cd habilidades': function () {
-    window.location.href = '../habilidades/index.html';
-    return ['<span class="term-output">Navegando para habilidades.css...</span>'];
-  },
   'cd contato': function () {
-    window.location.href = '../contato/index.html';
+    setTimeout(function () { window.location.href = 'index.html'; }, 300);
     return ['<span class="term-output">Navegando para contato.json...</span>'];
   },
 };
@@ -170,9 +164,7 @@ function abrirTerminal() {
   var panel = document.getElementById('terminal-panel');
   terminalAberto = !terminalAberto;
   panel.classList.toggle('open', terminalAberto);
-  if (terminalAberto) {
-    document.getElementById('term-input').focus();
-  }
+  if (terminalAberto) document.getElementById('term-input').focus();
 }
 
 function fecharTerminal() {
@@ -183,8 +175,6 @@ function fecharTerminal() {
 function executarComando(cmd) {
   var body = document.getElementById('terminal-body');
   var cmdLimpo = cmd.trim().toLowerCase();
-
-  // Adiciona a linha do comando
   var linhaCmd = document.createElement('span');
   linhaCmd.className = 'term-line';
   linhaCmd.innerHTML =
@@ -195,17 +185,10 @@ function executarComando(cmd) {
     '<span class="term-cmd">' + cmd + '</span>';
   body.appendChild(linhaCmd);
 
-  // Executa e imprime resultado
   var fn = comandos[cmdLimpo];
-  var linhas = [];
-  if (fn) {
-    linhas = fn();
-  } else if (cmdLimpo === '') {
-    linhas = [];
-  } else {
-    linhas = ['<span class="term-error">comando não encontrado: ' + cmd + '</span>',
-              '<span class="term-output">Digite "help" para ver os comandos.</span>'];
-  }
+  var linhas = fn ? fn() : (cmdLimpo === '' ? [] :
+    ['<span class="term-error">comando não encontrado: ' + cmd + '</span>',
+     '<span class="term-output">Digite "help" para ver os comandos.</span>']);
 
   linhas.forEach(function (l) {
     var el = document.createElement('span');
@@ -213,7 +196,6 @@ function executarComando(cmd) {
     el.innerHTML = l;
     body.appendChild(el);
   });
-
   body.scrollTop = body.scrollHeight;
   historicoTerminal.unshift(cmd);
   indiceHistorico = -1;
@@ -233,45 +215,29 @@ function configurarTerminal() {
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (indiceHistorico > 0) {
-        indiceHistorico--;
-        this.value = historicoTerminal[indiceHistorico];
-      } else {
-        indiceHistorico = -1;
-        this.value = '';
-      }
+      if (indiceHistorico > 0) { indiceHistorico--; this.value = historicoTerminal[indiceHistorico]; }
+      else { indiceHistorico = -1; this.value = ''; }
     }
   });
 }
 
 // ── EVENTOS GLOBAIS ──
 function configurarEventos() {
-  // Fechar modal de busca clicando fora
   document.getElementById('search-overlay').addEventListener('click', fecharBusca);
-
-  // Input de busca — filtrar e navegar
   document.getElementById('search-input').addEventListener('input', function () {
     renderArquivos(this.value);
   });
   document.getElementById('search-input').addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowDown')  { e.preventDefault(); navegarBusca(1); }
-    if (e.key === 'ArrowUp')    { e.preventDefault(); navegarBusca(-1); }
-    if (e.key === 'Enter')      { confirmarBusca(); }
-    if (e.key === 'Escape')     { fecharBusca(); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); navegarBusca(1); }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); navegarBusca(-1); }
+    if (e.key === 'Enter')     { confirmarBusca(); }
+    if (e.key === 'Escape')    { fecharBusca(); }
   });
-
-  // Atalhos de teclado globais
   document.addEventListener('keydown', function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
-      e.preventDefault(); abrirBusca();
-    }
-    if ((e.ctrlKey || e.metaKey) && e.key === '`') {
-      e.preventDefault(); abrirTerminal();
-    }
-    if (e.key === 'Escape') { fecharBusca(); }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'p') { e.preventDefault(); abrirBusca(); }
+    if ((e.ctrlKey || e.metaKey) && e.key === '`') { e.preventDefault(); abrirTerminal(); }
+    if (e.key === 'Escape') fecharBusca();
   });
-
-  // Status bar — abrir terminal ao clicar em "TERMINAL"
   document.getElementById('btn-terminal').addEventListener('click', abrirTerminal);
 }
 
@@ -328,8 +294,9 @@ function configurarResizeTerminal() {
   });
 }
 // ── INICIALIZAÇÃO ──
-gerarLinhas(30);
+gerarLinhas(28);
 rastrearCursor();
+animarBarras();
 configurarTrafficLights();
 configurarTerminal();
 configurarEventos();
